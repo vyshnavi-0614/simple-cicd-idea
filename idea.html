@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Hidden Library of You</title>
+<style>
+    body {margin:0;font-family: 'Segoe UI', sans-serif;background:#f3efe9;color:#333;text-align:center;}
+    header {background:#4a3f35;color:#fff;padding:15px;font-size:1.5em;}
+    .desk {margin:40px auto;max-width:600px;position:relative;}
+    .note, .locked {width:150px;height:100px;background:#fff7c8;border:2px solid #c7b98d;
+        display:inline-block;margin:10px;padding:10px;cursor:pointer;box-shadow:2px 2px 5px #ccc;}
+    .locked {background:#eee;position:relative;}
+    .locked::after {content:"🔒";position:absolute;right:5px;bottom:5px;font-size:18px;}
+    #popup {display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+        background:#fff;padding:20px;border-radius:10px;box-shadow:0 0 10px #555;max-width:80%;}
+    #popup button {margin-top:10px;padding:6px 12px;}
+</style>
+</head>
+<body>
+<header>📚 The Hidden Library of You</header>
+<div class="desk">
+    <div class="note" onclick="showNote('“Today I realized silence speaks louder.”')">Note 1</div>
+    <div class="note" onclick="showNote('“Dreamers never sleep—they rewrite reality.”')">Note 2</div>
+    <div class="locked" onclick="unlockNote()">Secret</div>
+</div>
+
+<div id="popup">
+    <p id="popup-text"></p>
+    <input type="text" id="answer" style="display:none;" placeholder="Your guess...">
+    <button onclick="closePopup()">Close</button>
+    <button id="submit" style="display:none;" onclick="checkAnswer()">Submit</button>
+</div>
+
+<script>
+const popup=document.getElementById('popup'), text=document.getElementById('popup-text'),
+ans=document.getElementById('answer'), submit=document.getElementById('submit');
+function showNote(msg){text.textContent=msg;popup.style.display='block';ans.style.display='none';submit.style.display='none';}
+function unlockNote(){popup.style.display='block';text.textContent="What's my comfort song?";ans.style.display='block';submit.style.display='inline-block';}
+function checkAnswer(){ if(ans.value.toLowerCase().trim()==='perfect'){showNote('“Yes! This is my safe place note.”');} else {text.textContent="Nope, try again.";} }
+function closePopup(){popup.style.display='none';}
+</script>
+</body>
+</html>
